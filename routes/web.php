@@ -23,4 +23,5 @@ Route::controller(ProductController::class)->group(function(){
     Route::put('/products/{product}','update')->name('products.update');
     Route::delete('/products/{product}','destroy')->name('products.destroy');
     Route::get('/products/{product}','show')->name('products.show');
+    Route::get('/search','search')->name('products.search');
 });
