@@ -19,32 +19,8 @@
 
 
         <div class="row d-flex justify-content-center">
-            {{-- Session Success SMS Show --}}
-            @if (Session::has('success'))
-            <div class="col-md-10 mt-4">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong> {{Session::get('success')}}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            </div>
-            @endif
-            {{-- Session Success SMS End --}}
-        </div>
-
-        <div class="row d-flex justify-content-center">
             <div class="col-md-12 d-flex justify-content-end">
-                <a href="{{route('products.create')}}" class="btn btn-dark">Add Product</a>
-            </div>
-        </div>
-
-        <div class="row d-flex justify-content-end my-3">
-            <div class="col-md-6 d-flex justify-content-end">
-                <form action="{{route('products.search')}}" method="get">
-                    <div class="input-group">
-                        <input class="form-control" name="search" placeholder="Search...">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
-                </form>
+                <a href="{{route('products.index')}}" class="btn btn-dark">Product List</a>
             </div>
         </div>
 
@@ -62,11 +38,8 @@
                                 <th>stock</th>
                                 <th>image</th>
                                 <th>Created at</th>
-                                <th>Action</th>
                             </thead>
                             <tbody class="text-center">
-                                @if ($products->isNotEmpty())
-                                @foreach ($products as $product )
                                 <tr>
                                     <td>{{$product->id}}</td>
                                     <td>{{$product->product_id}}</td>
@@ -80,23 +53,9 @@
                                         @endif
                                         </td>
                                     <td>{{\Carbon\Carbon::parse($product->created_at)->format('d M, Y') }}</td>
-                                    <td>
-                                        <a href="{{route('products.show',$product->id)}}"  class="btn btn-success">Product</a>
-
-                                        <a href="{{route('products.edit',$product->id)}}"  class="btn btn-dark">Edit</a>
-
-                                        <a href="#" onclick="deleteProduct({{$product->id}});" class="btn btn-danger">Delete</a>
-                                        <form id="delete-product-from-{{$product->id}}" action="{{route('products.destroy', $product->id)}}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                        </form>
-                                    </td>
                                 </tr>
-                                @endforeach
-                                @endif
                             </tbody>
                         </table>
-                        {{ $products->links() }}
                     </div>
                 </div>
             </div>
@@ -107,11 +66,3 @@
 </body>
 </html>
 
-
-<script>
-    function deleteProduct(id) {
-        if (confirm("Are you sure you want to delete Product?")) {
-            document.getElementById("delete-product-from-"+id).submit();
-        }
-    }
-</script>

@@ -17,23 +17,9 @@
             <h3 class="text-white text-center">মডিউল ২০ এর এসাইনমেন্ট :: Product Management </h3>
         </div>
 
-
-        <div class="row d-flex justify-content-center">
-            {{-- Session Success SMS Show --}}
-            @if (Session::has('success'))
-            <div class="col-md-10 mt-4">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong> {{Session::get('success')}}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            </div>
-            @endif
-            {{-- Session Success SMS End --}}
-        </div>
-
         <div class="row d-flex justify-content-center">
             <div class="col-md-12 d-flex justify-content-end">
-                <a href="{{route('products.create')}}" class="btn btn-dark">Add Product</a>
+                <a href="{{route('products.index')}}" class="btn btn-dark">Product List</a>
             </div>
         </div>
 
@@ -96,7 +82,6 @@
                                 @endif
                             </tbody>
                         </table>
-                        {{ $products->links() }}
                     </div>
                 </div>
             </div>
@@ -107,11 +92,3 @@
 </body>
 </html>
 
-
-<script>
-    function deleteProduct(id) {
-        if (confirm("Are you sure you want to delete Product?")) {
-            document.getElementById("delete-product-from-"+id).submit();
-        }
-    }
-</script>
